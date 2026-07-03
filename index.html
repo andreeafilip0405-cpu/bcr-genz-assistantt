@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="ro">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>BCR GenZ Hub</title>
 
 <style>
@@ -13,13 +11,12 @@ body{
 margin:0;
 font-family:Arial,sans-serif;
 background:#f4f4f4;
-display:flex;
-justify-content:center;
 padding:30px;
 }
 
 .container{
-width:900px;
+max-width:1100px;
+margin:auto;
 background:white;
 border-radius:20px;
 overflow:hidden;
@@ -29,8 +26,8 @@ box-shadow:0 8px 25px rgba(0,0,0,0.15);
 .header{
 background:#e30613;
 color:white;
-padding:25px;
 text-align:center;
+padding:25px;
 }
 
 .header h1{
@@ -52,8 +49,7 @@ text-align:center;
 }
 
 .card h3{
-margin:0;
-margin-bottom:10px;
+margin-top:0;
 }
 
 .section{
@@ -61,33 +57,42 @@ padding:20px;
 border-top:1px solid #eee;
 }
 
-.leaderboard-item{
-padding:10px;
-margin-bottom:10px;
+.leaderboard-item,
+.reward,
+.event,
+.badge{
 background:#fafafa;
+padding:12px;
+margin-bottom:10px;
 border-radius:10px;
 }
 
+.progress-container{
+height:20px;
+background:#ddd;
+border-radius:20px;
+overflow:hidden;
+margin-top:10px;
+}
+
+.progress-bar{
+height:20px;
+width:84%;
+background:#e30613;
+}
+
 .chat-container{
-margin-top:20px;
 border:1px solid #ddd;
 border-radius:15px;
 overflow:hidden;
+margin-top:15px;
 }
 
 .chat{
 height:350px;
 overflow-y:auto;
-padding:15px;
 background:#fafafa;
-}
-
-.bot{
-background:#ececec;
-padding:12px;
-border-radius:12px;
-margin-bottom:10px;
-max-width:80%;
+padding:15px;
 }
 
 .user{
@@ -96,15 +101,21 @@ color:white;
 padding:12px;
 border-radius:12px;
 margin-bottom:10px;
-margin-left:auto;
-max-width:80%;
+margin-left:100px;
+}
+
+.bot{
+background:#ececec;
+padding:12px;
+border-radius:12px;
+margin-bottom:10px;
+margin-right:100px;
 }
 
 .input-area{
 display:flex;
-padding:15px;
 gap:10px;
-background:white;
+padding:15px;
 }
 
 input{
@@ -118,7 +129,7 @@ button{
 background:#e30613;
 color:white;
 border:none;
-padding:12px 18px;
+padding:12px 20px;
 border-radius:10px;
 cursor:pointer;
 }
@@ -127,36 +138,23 @@ button:hover{
 background:#c00010;
 }
 
-.progress-container{
-background:#ddd;
-border-radius:20px;
-height:20px;
-overflow:hidden;
-margin-top:10px;
+@media(max-width:768px){
+
+.dashboard{
+grid-template-columns:1fr 1fr;
 }
 
-.progress{
-background:#e30613;
-height:20px;
-width:84%;
+.user{
+margin-left:20px;
 }
 
-.reward{
-padding:10px;
-background:#fafafa;
-border-radius:10px;
-margin-bottom:10px;
+.bot{
+margin-right:20px;
 }
 
-.event{
-padding:10px;
-background:#fafafa;
-border-radius:10px;
-margin-bottom:10px;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -164,20 +162,15 @@ margin-bottom:10px;
 <div class="container">
 
 <div class="header">
-
-<h1>🤖 BCR GenZ Hub</h1>
-
+<h1>🚀 BCR GenZ Hub</h1>
 <p>Powered by BCR Gen Z Ecosystem</p>
-
 </div>
-
-<!-- DASHBOARD -->
 
 <div class="dashboard">
 
 <div class="card">
 <h3>🏆 Status</h3>
-🥈 Silver
+🥈 Silver Ambassador
 </div>
 
 <div class="card">
@@ -187,105 +180,151 @@ margin-bottom:10px;
 
 <div class="card">
 <h3>📍 Universitate</h3>
-ASE
+ASE București
 </div>
 
 <div class="card">
 <h3>🥇 Poziție</h3>
-#3
+#3 Național
 </div>
 
 </div>
-
-<!-- PROGRESS -->
 
 <div class="section">
 
 <h2>🚀 Progress către Gold Ambassador</h2>
 
-420 / 500 puncte
+<p>420 / 500 puncte</p>
 
 <div class="progress-container">
-<div class="progress"></div>
+<div class="progress-bar"></div>
 </div>
 
 <p>Mai ai nevoie de 80 puncte pentru Gold Ambassador.</p>
 
 </div>
 
-<!-- LEADERBOARD -->
-
 <div class="section">
 
 <h2>🏆 Campus Battle Leaderboard</h2>
 
 <div class="leaderboard-item">
-🥇 ASE București - 540 pct
+🥇 ASE București — 540 puncte
 </div>
 
 <div class="leaderboard-item">
-🥈 UBB Cluj - 510 pct
+🥈 UBB Cluj — 510 puncte
 </div>
 
 <div class="leaderboard-item">
-🥉 Politehnica București - 490 pct
+🥉 Politehnica București — 490 puncte
 </div>
 
 <div class="leaderboard-item">
-4️⃣ UAIC Iași - 450 pct
+4️⃣ UAIC Iași — 450 puncte
 </div>
 
 </div>
-
-<!-- REWARDS -->
 
 <div class="section">
 
 <h2>🎁 Rewards Marketplace</h2>
 
 <div class="reward">
-☕ Starbucks Voucher - 100 puncte
+☕ Starbucks Voucher — 100 puncte
 </div>
 
 <div class="reward">
-💻 Notion Premium - 250 puncte
+💻 Notion Premium — 250 puncte
 </div>
 
 <div class="reward">
-🎓 Coursera Premium - 300 puncte
+🎓 Coursera Premium — 300 puncte
 </div>
 
 <div class="reward">
-💪 ESX Membership - 350 puncte
+💪 ESX Membership — 350 puncte
+</div>
+
+<div class="reward">
+🎫 UNTOLD Pass — 1000 puncte
+</div>
+
+<div class="reward">
+🎧 AirPods — 1500 puncte
 </div>
 
 </div>
-
-<!-- EVENTS -->
 
 <div class="section">
 
 <h2>📅 Upcoming Events</h2>
 
 <div class="event">
-15 Septembrie - Coffee & Finance Talks
+15 Septembrie — Coffee & Finance Talks
 </div>
 
 <div class="event">
-20 Septembrie - Campus Battle ASE
+20 Septembrie — Campus Battle ASE
 </div>
 
 <div class="event">
-27 Septembrie - Career Night
+27 Septembrie — Career Night
 </div>
 
 <div class="event">
-3 Octombrie - Financial Wellness Workshop
+3 Octombrie — Financial Wellness Workshop
+</div>
+
+<div class="event">
+10 Octombrie — Gen Z Summit
 </div>
 
 </div>
 
-<!-- CHATBOT -->
+<div class="section">
+
+<h2>🏅 Achievements & Badges</h2>
+
+<div class="badge">
+✅ First Referral
+</div>
+
+<div class="badge">
+✅ Event Participant
+</div>
+
+<div class="badge">
+✅ Community Builder
+</div>
+
+<div class="badge">
+🔒 Gold Ambassador
+</div>
+
+<div class="badge">
+🔒 Champion Ambassador
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>🎯 Referral Tracker</h2>
+
+<p><b>Referral Code:</b> ANDREEA2026</p>
+
+<p><b>Conturi George generate:</b> 43</p>
+
+<p><b>Target:</b> 60</p>
+
+<div class="progress-container">
+<div style="width:72%;height:20px;background:#e30613;"></div>
+</div>
+
+<p>72% target atins</p>
+
+</div>
 
 <div class="section">
 
@@ -296,7 +335,19 @@ ASE
 <div class="chat" id="chat">
 
 <div class="bot">
-Salut! Sunt BCR GenZ Assistant. Cum te pot ajuta?
+Salut! Sunt BCR GenZ Assistant 👋
+
+Întreabă-mă despre:
+
+• George
+
+• Ambassadors
+
+• Internshipuri
+
+• Beneficii
+
+• Evenimente
 </div>
 
 </div>
@@ -349,17 +400,25 @@ let response="";
 if(q.includes("george")){
 response="George este platforma digitală de banking a BCR.";
 }
+
 else if(q.includes("ambasador")){
-response="Programul Gen Z Ambassadors este dedicat studenților care reprezintă BCR în campus.";
+response="Programul BCR Gen Z Ambassadors dezvoltă comunități studențești și promovează educația financiară.";
 }
+
 else if(q.includes("beneficii")){
-response="Ambasadorii primesc mentorat, networking, training și acces la evenimente.";
+response="Ambasadorii beneficiază de mentorat, networking, traininguri și recompense.";
 }
+
 else if(q.includes("internship")){
-response="BCR oferă programe de internship și dezvoltare profesională.";
+response="BCR oferă internshipuri și oportunități de dezvoltare profesională pentru studenți.";
 }
+
+else if(q.includes("eveniment")){
+response="Poți consulta secțiunea Upcoming Events pentru activările disponibile.";
+}
+
 else{
-response="Momentan pot răspunde la întrebări despre George, Ambassadors, Beneficii și Internshipuri.";
+response="Momentan pot răspunde la întrebări despre George, Ambassadors, Internshipuri, Beneficii și Evenimente.";
 }
 
 setTimeout(function(){
@@ -370,7 +429,7 @@ chat.innerHTML +=
 chat.scrollTop =
 chat.scrollHeight;
 
-},700);
+},800);
 
 }
 
@@ -379,16 +438,12 @@ document
 .addEventListener(
 "keypress",
 function(event){
-
 if(event.key==="Enter"){
 sendMessage();
 }
-
 });
 
 </script>
 
 </body>
-
 </html>
-``
