@@ -123,6 +123,28 @@ Te pot ajuta cu:
 ✅ Evenimente pentru studenți
 </div>
 
+<div class="bot">
+
+Întrebări populare:
+
+<br><br>
+
+🔹 Cum devin ambasador?
+
+<br>
+
+🔹 Ce este George?
+
+<br>
+
+🔹 Ce beneficii au ambasadorii?
+
+<br>
+
+🔹 Există internshipuri la BCR?
+
+</div>
+
 </div>
 
 <div class="input-area">
@@ -205,12 +227,20 @@ else if(
 q.includes("beneficii")
 ){
 response=
-"Ambasadorii pot primi training-uri, networking, experiență practică, mentorat și acces la evenimente exclusive.";
+"Ambasadorii pot primi mentorat, training-uri, networking, acces la workshop-uri, experiență de leadership și beneficii de la parteneri.";
+}
+
+else if(
+q.includes("cariera") ||
+q.includes("job")
+){
+response=
+"BCR oferă oportunități pentru studenți și absolvenți prin internshipuri, programe de dezvoltare și roluri entry-level.";
 }
 
 else{
 response=
-"Încă sunt în dezvoltare. Momentan pot răspunde la întrebări despre George, BCR Gen Z Ambassadors, Internshipuri și Evenimente.";
+"Nu sunt sigur că am înțeles întrebarea. Încearcă să mă întrebi despre George, Ambasadori, Beneficii, Internshipuri sau Evenimente.";
 }
 
 setTimeout(function(){
