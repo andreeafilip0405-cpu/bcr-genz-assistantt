@@ -1,122 +1,113 @@
 <!DOCTYPE html>
 <html lang="ro">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BCR GenZ Assistant</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
+<title>BCR GenZ Assistant</title>
 
-    .chat-container {
-      width: 420px;
-      background: white;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-    }
+<style>
 
-    .header {
-      background: #e30613;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-    }
+body{
+background:#f5f5f5;
+font-family:Arial,sans-serif;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+}
 
-    .messages {
-      padding: 20px;
-      min-height: 250px;
-    }
+.card{
+background:white;
+width:450px;
+padding:30px;
+border-radius:20px;
+box-shadow:0 6px 25px rgba(0,0,0,0.15);
+text-align:center;
+}
 
-    .message {
-      background: #f1f1f1;
-      padding: 12px;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
+h1{
+color:#e30613;
+}
 
-    .buttons {
-      padding: 15px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+button{
+background:#e30613;
+color:white;
+border:none;
+padding:12px;
+margin:5px;
+border-radius:10px;
+cursor:pointer;
+}
 
-    button {
-      background: #e30613;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
+#answer{
+margin-top:20px;
+padding:15px;
+background:#f3f3f3;
+border-radius:10px;
+}
 
-    button:hover {
-      background: #c00010;
-    }
-  </style>
+</style>
 </head>
 
 <body>
 
-  <div class="chat-container">
+<div class="card">
 
-    <div class="header">
-      🚀 BCR GenZ Assistant
-    </div>
+<h1>🚀 BCR GenZ Assistant</h1>
 
-    <div class="messages" id="chat">
-      <div class="message">
-        Salut! Sunt BCR GenZ Assistant. Cu ce te pot ajuta?
-      </div>
-    </div>
+<p>Alege o întrebare:</p>
 
-    <div class="buttons">
-      <button onclick="answer('ambassador')">🌟 Ambasadori</button>
-      <button onclick="answer('george')">💳 George</button>
-      <button onclick="answer('internship')">🚀 Internshipuri</button>
-      <button onclick="answer('events')">🎓 Evenimente</button>
-    </div>
+<button onclick="showAnswer('ambassador')">
+🌟 Ambasadori
+</button>
 
-  </div>
+<button onclick="showAnswer('george')">
+💳 George
+</button>
 
-  <script>
-    function answer(type) {
+<button onclick="showAnswer('internship')">
+🚀 Internship
+</button>
 
-      let text = "";
+<button onclick="showAnswer('events')">
+🎓 Evenimente
+</button>
 
-      if(type === "ambassador"){
-        text = "Programul BCR Gen Z Ambassadors este dedicat studentilor care doresc sa reprezinte BCR in campus.";
-      }
+<div id="answer">
+Salut! Sunt BCR GenZ Assistant.
+</div>
 
-      if(type === "george"){
-        text = "George este platforma digitala de banking a BCR.";
-      }
+</div>
 
-      if(type === "internship"){
-        text = "BCR ofera programe de internship si oportunitati pentru studenti.";
-      }
+<script>
 
-      if(type === "events"){
-        text = "Evenimentele includ activari Back to School, workshop-uri si networking.";
-      }
+function showAnswer(topic){
 
-      document.getElementById("chat").innerHTML +=
-      `<div class="message">${text}</div>`;
-    }
-  </script>
+let text="";
+
+if(topic==="ambassador"){
+text="Programul BCR Gen Z Ambassadors este dedicat studentilor care vor sa reprezinte BCR in campus.";
+}
+
+if(topic==="george"){
+text="George este platforma digitala de banking dezvoltata de BCR.";
+}
+
+if(topic==="internship"){
+text="BCR ofera programe de internship si oportunitati de cariera pentru studenti.";
+}
+
+if(topic==="events"){
+text="Evenimentele includ Back to School, networking si workshop-uri.";
+}
+
+document.getElementById("answer").innerHTML=text;
+
+}
+
+</script>
 
 </body>
-
 </html>
