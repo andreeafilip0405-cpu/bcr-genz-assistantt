@@ -43,6 +43,7 @@ font-weight:bold;
 flex:1;
 padding:20px;
 overflow-y:auto;
+background:#fafafa;
 }
 
 .user{
@@ -51,7 +52,8 @@ color:white;
 padding:12px;
 border-radius:15px;
 margin-bottom:10px;
-margin-left:50px;
+margin-left:60px;
+text-align:left;
 }
 
 .bot{
@@ -59,7 +61,8 @@ background:#eeeeee;
 padding:12px;
 border-radius:15px;
 margin-bottom:10px;
-margin-right:50px;
+margin-right:60px;
+text-align:left;
 }
 
 .input-area{
@@ -67,6 +70,7 @@ display:flex;
 padding:15px;
 gap:10px;
 border-top:1px solid #ddd;
+background:white;
 }
 
 input{
@@ -74,6 +78,7 @@ flex:1;
 padding:12px;
 border-radius:10px;
 border:1px solid #ccc;
+font-size:15px;
 }
 
 button{
@@ -83,6 +88,7 @@ border:none;
 padding:12px 18px;
 border-radius:10px;
 cursor:pointer;
+font-size:14px;
 }
 
 button:hover{
@@ -104,7 +110,17 @@ background:#c00010;
 <div class="chat" id="chat">
 
 <div class="bot">
-Salut! Sunt BCR GenZ Assistant. Cum te pot ajuta?
+Salut! Sunt BCR GenZ Assistant. 👋
+
+Te pot ajuta cu:
+
+✅ George
+
+✅ Programul Gen Z Ambassadors
+
+✅ Internshipuri BCR
+
+✅ Evenimente pentru studenți
 </div>
 
 </div>
@@ -137,45 +153,96 @@ if(question===""){
 return;
 }
 
-document.getElementById("chat").innerHTML +=
+let chat =
+document.getElementById("chat");
+
+chat.innerHTML +=
 `<div class="user">${question}</div>`;
+
+input.value="";
+
+chat.innerHTML +=
+`<div class="bot" id="typing">
+🤖 GenZ Assistant scrie...
+</div>`;
 
 let q =
 question.toLowerCase();
 
 let response="";
 
-if(q.includes("george")){
+if(
+q.includes("george") ||
+q.includes("cont") ||
+q.includes("card")
+){
 response=
-"George este platforma digitală de banking a BCR.";
+"George este platforma digitală de banking a BCR unde poți gestiona conturi, carduri și plăți.";
 }
 
-else if(q.includes("ambasador")){
+else if(
+q.includes("ambasador")
+){
 response=
-"Programul BCR Gen Z Ambassadors este dedicat studenților care vor să reprezinte BCR în campus.";
+"Programul BCR Gen Z Ambassadors este destinat studenților care vor să reprezinte BCR în universități și să organizeze activări în campus.";
 }
 
-else if(q.includes("internship")){
+else if(
+q.includes("internship")
+){
 response=
-"BCR oferă oportunități de internship și dezvoltare pentru studenți.";
+"BCR oferă oportunități de internship și dezvoltare profesională pentru studenți și absolvenți.";
 }
 
-else if(q.includes("eveniment")){
+else if(
+q.includes("eveniment")
+){
 response=
-"BCR organizează activări Back To School, workshop-uri și evenimente de networking.";
+"BCR organizează activări Back To School, workshop-uri, networking și evenimente pentru studenți.";
+}
+
+else if(
+q.includes("beneficii")
+){
+response=
+"Ambasadorii pot primi training-uri, networking, experiență practică, mentorat și acces la evenimente exclusive.";
 }
 
 else{
 response=
-"Momentan pot răspunde la întrebări despre George, internshipuri, ambasadori și evenimente.";
+"Încă sunt în dezvoltare. Momentan pot răspunde la întrebări despre George, BCR Gen Z Ambassadors, Internshipuri și Evenimente.";
 }
 
-document.getElementById("chat").innerHTML +=
+setTimeout(function(){
+
+let typing =
+document.getElementById("typing");
+
+if(typing){
+typing.remove();
+}
+
+chat.innerHTML +=
 `<div class="bot">${response}</div>`;
 
-input.value="";
+chat.scrollTop =
+chat.scrollHeight;
+
+},1000);
 
 }
+
+document
+.getElementById("userInput")
+.addEventListener(
+"keypress",
+function(event){
+
+if(event.key==="Enter"){
+sendMessage();
+}
+
+});
 
 </script>
 
