@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ro">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,11 +42,29 @@ border-radius:10px;
 cursor:pointer;
 }
 
+button:hover{
+background:#c00010;
+}
+
 #answer{
 margin-top:20px;
 padding:15px;
 background:#f3f3f3;
 border-radius:10px;
+min-height:60px;
+}
+
+input{
+flex:1;
+padding:10px;
+border-radius:10px;
+border:1px solid #ccc;
+}
+
+.input-area{
+display:flex;
+gap:10px;
+margin-top:15px;
 }
 
 </style>
@@ -57,7 +76,7 @@ border-radius:10px;
 
 <h1>🚀 BCR GenZ Assistant</h1>
 
-<p>Alege o întrebare:</p>
+<p>Alege o întrebare sau scrie una:</p>
 
 <button onclick="showAnswer('ambassador')">
 🌟 Ambasadori
@@ -77,6 +96,19 @@ border-radius:10px;
 
 <div id="answer">
 Salut! Sunt BCR GenZ Assistant.
+</div>
+
+<div class="input-area">
+
+<input
+id="userInput"
+type="text"
+placeholder="Scrie o întrebare...">
+
+<button onclick="sendMessage()">
+Trimite
+</button>
+
 </div>
 
 </div>
@@ -107,7 +139,42 @@ document.getElementById("answer").innerHTML=text;
 
 }
 
+function sendMessage(){
+
+let question =
+document.getElementById("userInput")
+.value
+.toLowerCase();
+
+let response="";
+
+if(question.includes("ambasador")){
+response="Programul BCR Gen Z Ambassadors este destinat studentilor care vor sa reprezinte BCR in campus.";
+}
+
+else if(question.includes("george")){
+response="George este platforma digitala de banking dezvoltata de BCR.";
+}
+
+else if(question.includes("internship")){
+response="BCR ofera internshipuri si programe pentru studenti.";
+}
+
+else if(question.includes("eveniment")){
+response="BCR organizeaza activari Back To School si workshop-uri pentru studenti.";
+}
+
+else{
+response="Momentan pot raspunde la intrebari despre George, Ambasadori, Internshipuri si Evenimente.";
+}
+
+document.getElementById("answer").innerHTML =
+response;
+
+}
+
 </script>
 
 </body>
+
 </html>
