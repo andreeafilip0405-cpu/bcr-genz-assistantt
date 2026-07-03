@@ -10,34 +10,77 @@
 <style>
 
 body{
-background:#f5f5f5;
+margin:0;
 font-family:Arial,sans-serif;
+background:#f5f5f5;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
-margin:0;
 }
 
-.card{
+.chat-container{
+width:500px;
+height:700px;
 background:white;
-width:450px;
-padding:30px;
 border-radius:20px;
-box-shadow:0 6px 25px rgba(0,0,0,0.15);
-text-align:center;
+overflow:hidden;
+box-shadow:0 8px 30px rgba(0,0,0,0.15);
+display:flex;
+flex-direction:column;
 }
 
-h1{
-color:#e30613;
+.header{
+background:#e30613;
+color:white;
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.chat{
+flex:1;
+padding:20px;
+overflow-y:auto;
+}
+
+.user{
+background:#e30613;
+color:white;
+padding:12px;
+border-radius:15px;
+margin-bottom:10px;
+margin-left:50px;
+}
+
+.bot{
+background:#eeeeee;
+padding:12px;
+border-radius:15px;
+margin-bottom:10px;
+margin-right:50px;
+}
+
+.input-area{
+display:flex;
+padding:15px;
+gap:10px;
+border-top:1px solid #ddd;
+}
+
+input{
+flex:1;
+padding:12px;
+border-radius:10px;
+border:1px solid #ccc;
 }
 
 button{
 background:#e30613;
 color:white;
 border:none;
-padding:12px;
-margin:5px;
+padding:12px 18px;
 border-radius:10px;
 cursor:pointer;
 }
@@ -46,64 +89,31 @@ button:hover{
 background:#c00010;
 }
 
-#answer{
-margin-top:20px;
-padding:15px;
-background:#f3f3f3;
-border-radius:10px;
-min-height:60px;
-}
-
-input{
-flex:1;
-padding:10px;
-border-radius:10px;
-border:1px solid #ccc;
-}
-
-.input-area{
-display:flex;
-gap:10px;
-margin-top:15px;
-}
-
 </style>
+
 </head>
 
 <body>
 
-<div class="card">
+<div class="chat-container">
 
-<h1>🚀 BCR GenZ Assistant</h1>
+<div class="header">
+🚀 BCR GenZ Assistant
+</div>
 
-<p>Alege o întrebare sau scrie una:</p>
+<div class="chat" id="chat">
 
-<button onclick="showAnswer('ambassador')">
-🌟 Ambasadori
-</button>
+<div class="bot">
+Salut! Sunt BCR GenZ Assistant. Cum te pot ajuta?
+</div>
 
-<button onclick="showAnswer('george')">
-💳 George
-</button>
-
-<button onclick="showAnswer('internship')">
-🚀 Internship
-</button>
-
-<button onclick="showAnswer('events')">
-🎓 Evenimente
-</button>
-
-<div id="answer">
-Salut! Sunt BCR GenZ Assistant.
 </div>
 
 <div class="input-area">
 
 <input
 id="userInput"
-type="text"
-placeholder="Scrie o întrebare...">
+placeholder="Scrie întrebarea ta...">
 
 <button onclick="sendMessage()">
 Trimite
@@ -115,61 +125,55 @@ Trimite
 
 <script>
 
-function showAnswer(topic){
-
-let text="";
-
-if(topic==="ambassador"){
-text="Programul BCR Gen Z Ambassadors este dedicat studentilor care vor sa reprezinte BCR in campus.";
-}
-
-if(topic==="george"){
-text="George este platforma digitala de banking dezvoltata de BCR.";
-}
-
-if(topic==="internship"){
-text="BCR ofera programe de internship si oportunitati de cariera pentru studenti.";
-}
-
-if(topic==="events"){
-text="Evenimentele includ Back to School, networking si workshop-uri.";
-}
-
-document.getElementById("answer").innerHTML=text;
-
-}
-
 function sendMessage(){
 
+let input =
+document.getElementById("userInput");
+
 let question =
-document.getElementById("userInput")
-.value
-.toLowerCase();
+input.value;
+
+if(question===""){
+return;
+}
+
+document.getElementById("chat").innerHTML +=
+`<div class="user">${question}</div>`;
+
+let q =
+question.toLowerCase();
 
 let response="";
 
-if(question.includes("ambasador")){
-response="Programul BCR Gen Z Ambassadors este destinat studentilor care vor sa reprezinte BCR in campus.";
+if(q.includes("george")){
+response=
+"George este platforma digitală de banking a BCR.";
 }
 
-else if(question.includes("george")){
-response="George este platforma digitala de banking dezvoltata de BCR.";
+else if(q.includes("ambasador")){
+response=
+"Programul BCR Gen Z Ambassadors este dedicat studenților care vor să reprezinte BCR în campus.";
 }
 
-else if(question.includes("internship")){
-response="BCR ofera internshipuri si programe pentru studenti.";
+else if(q.includes("internship")){
+response=
+"BCR oferă oportunități de internship și dezvoltare pentru studenți.";
 }
 
-else if(question.includes("eveniment")){
-response="BCR organizeaza activari Back To School si workshop-uri pentru studenti.";
+else if(q.includes("eveniment")){
+response=
+"BCR organizează activări Back To School, workshop-uri și evenimente de networking.";
 }
 
 else{
-response="Momentan pot raspunde la intrebari despre George, Ambasadori, Internshipuri si Evenimente.";
+response=
+"Momentan pot răspunde la întrebări despre George, internshipuri, ambasadori și evenimente.";
 }
 
-document.getElementById("answer").innerHTML =
-response;
+document.getElementById("chat").innerHTML +=
+`<div class="bot">${response}</div>`;
+
+input.value="";
 
 }
 
