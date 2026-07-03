@@ -21,7 +21,7 @@ height:100vh;
 
 .chat-container{
 width:500px;
-height:700px;
+height:750px;
 background:white;
 border-radius:20px;
 overflow:hidden;
@@ -37,6 +37,13 @@ padding:20px;
 text-align:center;
 font-size:28px;
 font-weight:bold;
+}
+
+.header small{
+display:block;
+margin-top:5px;
+font-size:12px;
+opacity:0.8;
 }
 
 .chat{
@@ -63,6 +70,10 @@ border-radius:15px;
 margin-bottom:10px;
 margin-right:60px;
 text-align:left;
+}
+
+small{
+opacity:0.7;
 }
 
 .input-area{
@@ -95,6 +106,12 @@ button:hover{
 background:#c00010;
 }
 
+.clear-area{
+padding:10px;
+text-align:center;
+background:white;
+}
+
 </style>
 
 </head>
@@ -104,28 +121,41 @@ background:#c00010;
 <div class="chat-container">
 
 <div class="header">
-🚀 BCR GenZ Assistant
+🤖 BCR GenZ Assistant
+<small>Powered by AI</small>
 </div>
 
 <div class="chat" id="chat">
 
 <div class="bot">
+
 Salut! Sunt BCR GenZ Assistant. 👋
+
+<br><br>
 
 Te pot ajuta cu:
 
+<br><br>
+
 ✅ George
+
+<br>
 
 ✅ Programul Gen Z Ambassadors
 
+<br>
+
 ✅ Internshipuri BCR
 
+<br>
+
 ✅ Evenimente pentru studenți
+
 </div>
 
 <div class="bot">
 
-Întrebări populare:
+💡 Întrebări populare:
 
 <br><br>
 
@@ -159,6 +189,14 @@ Trimite
 
 </div>
 
+<div class="clear-area">
+
+<button onclick="clearChat()">
+🗑️ Șterge conversația
+</button>
+
+</div>
+
 </div>
 
 <script>
@@ -178,8 +216,21 @@ return;
 let chat =
 document.getElementById("chat");
 
+let time =
+new Date().toLocaleTimeString(
+'ro-RO',
+{
+hour:'2-digit',
+minute:'2-digit'
+}
+);
+
 chat.innerHTML +=
-`<div class="user">${question}</div>`;
+`<div class="user">
+${question}
+<br>
+<small>${time}</small>
+</div>`;
 
 input.value="";
 
@@ -253,12 +304,32 @@ typing.remove();
 }
 
 chat.innerHTML +=
-`<div class="bot">${response}</div>`;
+`<div class="bot">
+${response}
+<br>
+<small>${time}</small>
+</div>`;
 
 chat.scrollTop =
 chat.scrollHeight;
 
 },1000);
+
+}
+
+function clearChat(){
+
+document.getElementById("chat").innerHTML =
+
+`<div class="bot">
+
+Salut! Sunt BCR GenZ Assistant. 👋
+
+<br><br>
+
+Cum te pot ajuta?
+
+</div>`;
 
 }
 
