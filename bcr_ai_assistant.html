@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCR GenZ Assistant</title>
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f4f4;
+padding:30px;
+display:flex;
+justify-content:center;
+}
+
+.container{
+max-width:520px;
+width:100%;
+background:white;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 8px 25px rgba(0,0,0,0.15);
+}
+
+.header{
+background:#e30613;
+color:white;
+text-align:center;
+padding:22px;
+}
+
+.header h1{
+margin:0;
+font-size:20px;
+}
+
+.header p{
+margin:6px 0 0;
+font-size:13px;
+opacity:.85;
+}
+
+.chat-container{
+padding:20px;
+}
+
+.chat{
+height:420px;
+overflow-y:auto;
+background:#fafafa;
+padding:15px;
+border-radius:15px;
+border:1px solid #eee;
+}
+
+.msg{
+max-width:80%;
+padding:12px 14px;
+border-radius:14px;
+margin-bottom:10px;
+line-height:1.45;
+font-size:14px;
+white-space:pre-line;
+}
+
+.user{
+background:#e30613;
+color:white;
+margin-left:auto;
+border-bottom-right-radius:4px;
+}
+
+.bot{
+background:#ececec;
+color:#222;
+margin-right:auto;
+border-bottom-left-radius:4px;
+}
+
+.suggestions{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin:12px 0 4px;
+}
+
+.chip{
+background:#fdeceb;
+color:#e30613;
+border:1px solid #f5c3c0;
+padding:6px 12px;
+border-radius:20px;
+font-size:12px;
+cursor:pointer;
+}
+
+.chip:hover{
+background:#e30613;
+color:white;
+}
+
+.input-area{
+display:flex;
+gap:10px;
+margin-top:14px;
+}
+
+input{
+flex:1;
+padding:12px 14px;
+border-radius:10px;
+border:1px solid #ccc;
+font-size:14px;
+}
+
+input:focus{
+outline:none;
+border-color:#e30613;
+}
+
+button{
+background:#e30613;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#c00010;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<h1>🤖 BCR GenZ Assistant</h1>
+<p>Întreabă orice despre programul de ambasadori</p>
+</div>
+
+<div class="chat-container">
+
+<div class="chat" id="chat">
+<div class="msg bot">Salut! Sunt asistentul programului BCR Gen Z Ambassadors.
+
+Te pot ajuta cu întrebări despre George, programul de ambasadori, niveluri și XP, beneficii, internshipuri, evenimente sau sfaturi de CV/interviu.</div>
+</div>
+
+<div class="suggestions">
+<div class="chip" onclick="ask('Ce este George?')">Ce este George?</div>
+<div class="chip" onclick="ask('Cum urc de nivel?')">Cum urc de nivel?</div>
+<div class="chip" onclick="ask('Ce beneficii am?')">Ce beneficii am?</div>
+<div class="chip" onclick="ask('Sfaturi pentru interviu')">Sfaturi interviu</div>
+</div>
+
+<div class="input-area">
+<input id="userInput" placeholder="Scrie întrebarea ta...">
+<button onclick="sendMessage()">Trimite</button>
+</div>
+
+</div>
+</div>
+
+<script>
+
+const RESPONSES = [
+  {
+    keywords: ["george"],
+    reply: "George este aplicația de mobile & internet banking a BCR. Ca ambasador, rolul tău e să ajuți studenții să-și deschidă un cont George și să înțeleagă beneficiile lui (fără costuri de administrare, plăți instant, gestionare completă din telefon)."
+  },
+  {
+    keywords: ["nivel", "xp", "level", "avansez", "urc"],
+    reply: "Nivelurile se bazează pe XP acumulat din conturi George deschise, participare la evenimente și challenge-uri săptămânale. Cu cât aduci mai multe conturi și participi mai activ, cu atât urci mai repede spre următorul nivel. Verifică în profilul tău câte puncte mai ai până la treapta următoare."
+  },
+  {
+    keywords: ["beneficii", "recompense", "reward"],
+    reply: "Beneficiile ambasadorilor includ: mentorat din partea colegilor din bancă, acces la traininguri, networking cu alți studenți din toată țara și recompense (vouchere, abonamente, produse) pe măsură ce acumulezi XP."
+  },
+  {
+    keywords: ["ambasador", "program", "membru"],
+    reply: "Programul BCR Gen Z Ambassadors are două niveluri: Ambasador (rol principal, deschide conturi și organizează activări) și Membru Campus / George Friend (susține ambasadorul local). Scopul e educație financiară pentru studenți și promovarea contului George pe campus."
+  },
+  {
+    keywords: ["internship", "cariera", "carieră", "angajare"],
+    reply: "BCR oferă internshipuri și oportunități de dezvoltare pentru studenții implicați activ în program. Participarea ca ambasador contează ca experiență relevantă și poate deschide calea spre un internship sau un job full-time în bancă."
+  },
+  {
+    keywords: ["eveniment", "activare", "campus battle"],
+    reply: "Evenimentele includ activări pe campus, Campus Battles (competiții între universități) și sesiuni de educație financiară. Sunt anunțate în secțiunea de evenimente a programului — verifică acolo datele exacte."
+  },
+  {
+    keywords: ["cv"],
+    reply: "Un CV bun de student are 5 secțiuni clare: educație, experiență (chiar și internship-uri scurte), proiecte relevante, competențe tehnice și activități extracurriculare (inclusiv rolul de ambasador). Ține-l la o pagină și adaptează-l la fiecare job."
+  },
+  {
+    keywords: ["interviu"],
+    reply: "Pentru interviu, pregătește 2-3 exemple concrete din experiența ta (ex: cum ai crescut numărul de conturi George deschise) folosind structura Situație-Acțiune-Rezultat. Recruiterii apreciază cifre concrete, nu doar descrieri generale."
+  },
+  {
+    keywords: ["economii", "buget", "bani"],
+    reply: "Ca student, regula 50-30-20 e un punct bun de plecare: 50% cheltuieli esențiale (chirie, mâncare), 30% cheltuieli personale, 20% economii. George te ajută să vezi clar aceste categorii direct din aplicație."
+  },
+  {
+    keywords: ["job", "prim job", "angajat"],
+    reply: "Pentru primul job, contează cel mai mult: internshipuri, proiecte personale pe care le poți arăta, și networking (inclusiv prin programul de ambasadori). Rolul de ambasador BCR e exact genul de experiență care iese în evidență pe CV."
+  }
+];
+
+const FALLBACK = "Nu sunt sigur că am înțeles exact. Pot răspunde la întrebări despre: George, niveluri și XP, beneficii, internshipuri, evenimente, CV, interviu sau economii. Poți reformula întrebarea?";
+
+function findResponse(text){
+  const q = text.toLowerCase();
+  for (const item of RESPONSES){
+    if (item.keywords.some(k => q.includes(k))){
+      return item.reply;
+    }
+  }
+  return FALLBACK;
+}
+
+function appendMessage(text, cls){
+  const chat = document.getElementById("chat");
+  const div = document.createElement("div");
+  div.className = "msg " + cls;
+  div.textContent = text;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function sendMessage(){
+  const input = document.getElementById("userInput");
+  const question = input.value.trim();
+  if (question === "") return;
+
+  appendMessage(question, "user");
+  input.value = "";
+
+  const reply = findResponse(question);
+
+  setTimeout(function(){
+    appendMessage(reply, "bot");
+  }, 500);
+}
+
+function ask(text){
+  document.getElementById("userInput").value = text;
+  sendMessage();
+}
+
+document.getElementById("userInput").addEventListener("keypress", function(event){
+  if (event.key === "Enter"){
+    sendMessage();
+  }
+});
+
+</script>
+
+</body>
+</html>
